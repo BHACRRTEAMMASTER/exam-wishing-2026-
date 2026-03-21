@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Congratulations Krishna Devi</title>
+<style>
+body{
+  text-align:center;
+  font-family:Arial;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color:white;
+}
+img{width:250px;border-radius:15px;}
+</style>
+</head>
+<body>
+
+<h1>✨ Hello Krishna Devi 💖</h1>
+<button onclick="start()">Continue</button>
+
+<div id="main" style="display:none;">
+  <img id="img" src="image1.png">
+  <p id="msg">🎉 Congratulations Miss Krishna Devi!</p>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+var firebaseConfig = {
+  databaseURL: "https://climexsensipanel-adminpanel-default-rtdb.firebaseio.com/"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+function start(){
+ document.getElementById("main").style.display="block";
+}
+
+// maintenance check
+db.ref("maintenance").on("value",snap=>{
+ if(snap.val()){
+   document.body.innerHTML="<h1>⚠️ Site under maintenance by Biswajit Sir</h1>";
+ }
+});
+
+// message update
+db.ref("message").on("value",snap=>{
+ if(snap.val()){
+   document.getElementById("msg").innerText=snap.val();
+ }
+});
+</script>
+
+</body>
+</html>
