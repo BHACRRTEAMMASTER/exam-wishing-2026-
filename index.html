@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krishna Devi 💖</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+ font-family: 'Segoe UI', sans-serif;
+ background: linear-gradient(135deg,#ff758c,#ff7eb3);
+ color:white;
+ overflow:hidden;
+}
+
+/* Center */
+.center{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ height:100vh;
+ flex-direction:column;
+ text-align:center;
+ padding:20px;
+}
+
+/* Typing */
+.typing{
+ font-size:26px;
+ border-right:3px solid white;
+ white-space:nowrap;
+ overflow:hidden;
+ width:0;
+ animation: typing 3s steps(30,end) forwards, blink 0.7s infinite;
+}
+
+@keyframes typing{
+ to{width:100%;}
+}
+@keyframes blink{
+ 50%{border-color:transparent;}
+}
+
+/* Button */
+.btn{
+ padding:12px 25px;
+ border:none;
+ border-radius:25px;
+ background:white;
+ color:black;
+ margin-top:20px;
+ font-weight:bold;
+}
+
+/* Main Card */
+#main{display:none;}
+
+.card{
+ background: rgba(255,255,255,0.1);
+ backdrop-filter: blur(10px);
+ border-radius:20px;
+ padding:20px;
+ width:100%;
+ max-width:320px;
+ box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+img{
+ width:100%;
+ border-radius:15px;
+}
+
+/* Message */
+.msg{
+ margin-top:15px;
+ font-size:16px;
+ line-height:1.4;
+}
+
+/* Buttons */
+.actions button{
+ margin:5px;
+}
+
+/* Gallery */
+#gallery{
+ display:none;
+ overflow-y:auto;
+ height:100vh;
+ padding:10px;
+}
+#gallery img{
+ width:100%;
+ margin-bottom:10px;
+}
+
+/* Maintenance */
+#maintenance{
+ display:none;
+ font-size:20px;
+ padding:20px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro" class="center">
+  <div class="typing">Hello Krishna Devi 💖</div>
+  <p>How are you?</p>
+  <button class="btn" onclick="start()">Continue</button>
+</div>
+
+<!-- MAIN -->
+<div id="main" class="center">
+  <div class="card">
+    <img id="img" src="image1.png">
+
+    <div class="msg" id="msg">
+      🎉 Congratulations Miss Krishna Devi!  
+      You passed your exam beautifully 💖
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="next()">Next</button>
+      <button class="btn" onclick="viewAll()">View All</button>
+      <button class="btn" onclick="download()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery"></div>
+
+<!-- MAINTENANCE -->
+<div id="maintenance" class="center">
+ ⚠️ Sorry Krishna Devi, site is under maintenance by Biswajit Sir
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+var firebaseConfig = {
+ databaseURL: "https://climexsensipanel-adminpanel-default-rtdb.firebaseio.com/"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+/* Images */
+let images=["image1.png","image2.png","image3.png"];
+let i=0;
+
+/* Start */
+function start(){
+ document.getElementById("intro").style.display="none";
+ document.getElementById("main").style.display="flex";
+}
+
+/* Next */
+function next(){
+ i=(i+1)%images.length;
+ document.getElementById("img").src=images[i];
+}
+
+/* View All */
+function viewAll(){
+ let g=document.getElementById("gallery");
+ g.style.display="block";
+ g.innerHTML="";
+ images.forEach(img=>{
+   g.innerHTML+=`<img src="${img}">`;
+ });
+}
+
+/* Download */
+function download(){
+ images.forEach(img=>{
+   let a=document.createElement("a");
+   a.href=img;
+   a.download=img;
+   a.click();
+ });
+}
+
+/* Firebase */
+db.ref("maintenance").on("value",snap=>{
+ if(snap.val()){
+   document.body.innerHTML=document.getElementById("maintenance").outerHTML;
+ }
+});
+
+db.ref("message").on("value",snap=>{
+ if(snap.val()){
+   document.getElementById("msg").innerText=snap.val();
+ }
+});
+</script>
+
+</body>
+</html>
