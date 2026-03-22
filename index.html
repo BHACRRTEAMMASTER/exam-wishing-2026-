@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krishna Devi</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+}
+
+/* CENTER SCREEN */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 350px;
+}
+
+/* BUTTON */
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    background: gold;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+/* MAIN PAGE */
+.main {
+    display: none;
+    padding: 20px;
+}
+
+.main-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.image-box img {
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px black;
+}
+
+.side {
+    text-align: center;
+}
+
+.side h2 {
+    color: gold;
+}
+
+.buttons button {
+    display: block;
+    margin: 10px auto;
+    width: 150px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST SCREEN -->
+<div class="container" id="welcome">
+    <div class="card">
+        <h2>❤️ WELCOME ❤️</h2>
+        <p>Hi Miss,<br><b>Krishna Devi</b><br>Aapko Swagat Hai</p>
+        <button onclick="start()">Continue</button>
+    </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="main" id="mainPage">
+    <h1 style="text-align:center;">🎉 CONGRATULATION 🎉</h1>
+
+    <div class="main-box">
+        
+        <!-- IMAGE -->
+        <div class="image-box">
+            <img id="mainImage" src="image1.jpg">
+        </div>
+
+        <!-- SIDE PANEL -->
+        <div class="side">
+            <h2>Krishna Devi</h2>
+
+            <div class="buttons">
+                <button onclick="changeImage('image1.jpg')">Image 1</button>
+                <button onclick="changeImage('image2.jpg')">Image 2</button>
+                <button onclick="changeImage('image3.jpg')">Image 3</button>
+                <button onclick="saveImage()">Save</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function start() {
+    document.getElementById("welcome").style.display = "none";
+    document.getElementById("mainPage").style.display = "block";
+}
+
+function changeImage(img) {
+    document.getElementById("mainImage").src = img;
+}
+
+function saveImage() {
+    alert("Image Saved Successfully ✅");
+}
+</script>
+
+</body>
+</html>
