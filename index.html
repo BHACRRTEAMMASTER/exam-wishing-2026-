@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congratulations</title>
+
+<style>
+body{
+    margin:0;
+    font-family:sans-serif;
+    background:black;
+    color:white;
+    text-align:center;
+}
+
+/* Background */
+.bg{
+    position:fixed;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:blur(8px) brightness(0.4);
+}
+
+/* Page hidden */
+.page{
+    display:none;
+}
+
+/* Active page */
+.active{
+    display:block;
+}
+
+/* Card */
+.card{
+    margin-top:40px;
+}
+
+/* Image */
+.card img{
+    width:80%;
+    border-radius:20px;
+}
+
+/* Animated text */
+.text{
+    font-size:26px;
+    font-weight:bold;
+    color:yellow;
+    margin:20px;
+    animation:fade 2s ease;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:translateY(-20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* Buttons */
+.btn{
+    display:block;
+    width:220px;
+    margin:10px auto;
+    padding:12px;
+    border:none;
+    border-radius:20px;
+    background:gold;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<img src="image1.jpg" class="bg">
+
+<!-- PAGE 1 -->
+<div id="mainPage" class="page active">
+
+<div class="card">
+
+<div class="text">
+🎉 Congratulations Krishna Devi 🎉 <br>
+You passed your exam successfully! <br>
+Keep shining and achieve more success 💖
+</div>
+
+<img src="image1.jpg">
+
+<br>
+
+<button class="btn" onclick="showAll()">View All Images</button>
+<button class="btn" onclick="downloadImg()">Save Image</button>
+<button class="btn" onclick="feedback()">Send Feedback</button>
+
+</div>
+</div>
+
+<!-- PAGE 2 (ALL IMAGES) -->
+<div id="allPage" class="page">
+
+<h2 style="color:yellow;">All Images</h2>
+
+<img src="image1.jpg">
+<img src="image2.jpg">
+<img src="image3.jpg">
+
+<br>
+<button class="btn" onclick="goBack()">Back</button>
+
+</div>
+
+<script>
+
+function showAll(){
+    document.getElementById("mainPage").classList.remove("active");
+    document.getElementById("allPage").classList.add("active");
+}
+
+function goBack(){
+    document.getElementById("allPage").classList.remove("active");
+    document.getElementById("mainPage").classList.add("active");
+}
+
+function downloadImg(){
+    let a=document.createElement('a');
+    a.href="image1.jpg";
+    a.download="image.jpg";
+    a.click();
+}
+
+function feedback(){
+    let msg="Thank you so much! I really liked it ❤️🔥";
+
+    let option = confirm("OK = WhatsApp | Cancel = Instagram");
+
+    if(option){
+        window.open("https://wa.me/917099517202?text="+encodeURIComponent(msg));
+    }else{
+        window.open("https://instagram.com/biswajit_jur");
+    }
+}
+
+</script>
+
+</body>
+</html>
